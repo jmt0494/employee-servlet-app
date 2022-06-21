@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import com.revature.models.Employee;
 import com.revature.util.HibernateUtil;
 
+// servlet >> service >> dao
 public class EmployeeDao {
 	
 	// CRUD methods
@@ -28,7 +29,14 @@ public class EmployeeDao {
 	}
 	
 	public List<Employee> findAll() {
-		return new ArrayList<Employee>();
+		
+		//grab the session
+		Session ses = HibernateUtil.getSession();
+		
+		// make an hql -- Hibernate query language
+		List<Employee> emps = ses.createQuery("from Employee", Employee.class).list();
+		
+		return emps;
 	}
 	
 	public boolean delete(int id) {
