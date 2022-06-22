@@ -1,10 +1,10 @@
 package com.revature.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 
 import com.revature.models.Employee;
 import com.revature.util.HibernateUtil;
@@ -22,8 +22,15 @@ public class EmployeeDao {
 		Transaction tx = ses.beginTransaction();
 		
 		// cature the pk returned when the session method save() is called
-		int pk = (int) ses.save(e);
+		int pk;
+		try {
+			pk = (int) ses.save(e);
+		} catch (ConstraintViolationException e1) {
+			e1.printStackTrace();
+			return -1;
+		}
 		
+		tx.commit();
 		//return the pk
 		return pk;
 	}

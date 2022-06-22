@@ -1,6 +1,7 @@
 package com.revature.web;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,10 @@ public class FrontController extends HttpServlet {
 			break;
 		case "employees":
 			// invode some functionality from the requestHelper which would return all empouees
+			RequestHelper.processEmployees(request, response);
 			break;
+		case "register":
+			RequestHelper.processRegistration(request, response);
 		default:
 			//customer error page
 			break;	

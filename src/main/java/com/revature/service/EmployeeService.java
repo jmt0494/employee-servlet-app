@@ -28,4 +28,8 @@ public class EmployeeService {
 		return edao.findAll();
 	}
 	
+	public int register(Employee e) {
+		return edao.insert(e);
+	}
+	
 }
